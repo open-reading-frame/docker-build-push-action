@@ -1,4 +1,4 @@
-# docker-build-push
+# docker-build-push-action
 
 This action builds and optionally pushes a docker image.
 When given a registry, username, and password, it will authenticate to the registry to allow pulling private base images for builds, or pushing built images to a private registry.
