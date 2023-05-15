@@ -1,0 +1,28 @@
+name: repo-jobs
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  increment-version:
+    name: Increment Version
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run the increment-version action
+        uses: open-reading-frame/increment-version-action@main
+        with:
+          token: ${{ secrets.INCREMENT_VERSION }}
+  check-version:
+    if: ${{ github.event_name == 'pull_request' }}
+    name: Check Version
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+      - name: Run the check-version action
+        uses: open-reading-frame/check-version-action@main
+        with:
+          include-paths: 'action.yml'
